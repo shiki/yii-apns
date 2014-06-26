@@ -78,7 +78,7 @@ class YAPNS extends \CApplicationComponent
   }
 
   /**
-   * @return ApnsPHP_Push
+   * @return \ApnsPHP_Push
    */
   public function getPushProvider()
   {
