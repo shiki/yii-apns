@@ -55,7 +55,7 @@ class YAPNS extends \CApplicationComponent
 
   /**
    *
-   * @var ApnsPHP_Push
+   * @var \ApnsPHP_Push
    */
   protected $_pushProvider;
 
@@ -66,9 +66,9 @@ class YAPNS extends \CApplicationComponent
   public function init()
   {
     if (empty($this->providerCertificateFilePath))
-      throw new CException('Push SSL certificate is required.');
+      throw new \CException('Push SSL certificate is required.');
     if (!in_array($this->environment, array(self::ENV_PRODUCTION, self::ENV_SANDBOX)))
-      throw new CException('Environment is invalid.');
+      throw new \CException('Environment is invalid.');
 
     $this->initAutoloader();
 
@@ -86,7 +86,7 @@ class YAPNS extends \CApplicationComponent
       return $this->_pushProvider;
 
     $push = new \ApnsPHP_Push(
-      $this->environment == self::ENV_PRODUCTION ? \ApnsPHP_Push::ENVIRONMENT_PRODUCTION : \ApnsPHP_Push::ENVIRONMENT_SANDBOX,
+      ($this->environment == self::ENV_PRODUCTION) ? \ApnsPHP_Push::ENVIRONMENT_PRODUCTION : \ApnsPHP_Push::ENVIRONMENT_SANDBOX,
       $this->providerCertificateFilePath
     );
     if ($this->rootCertificationAuthorityFilePath)
